@@ -1,10 +1,18 @@
-// If life was easy, we could just do things the easy way:
-// var getElementsByClassName = function (className) {
-//   return document.getElementsByClassName(className);
-// };
+var getElementsByClassName = function(className) {
+  result = [];
 
-// But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
-  // your code here
+  var check = function(className, element) {
+    // check if element has class; if so, add to result
+    if (element.classList && element.classList.contains(className)) {
+      result.push(element);
+    }
+    // run check on each child
+    for (let child of element.childNodes) {
+      check(className, child);
+    }
+  };
+
+  check(className, document.body);
+
+  return result;
 };
